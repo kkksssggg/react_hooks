@@ -1,15 +1,21 @@
 import './App.css';
 import { useState } from 'react';
 
+const useInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue)
+  const onChange = event => {
+    setValue(event.target.value)
+    console.log(value)
+  }
+  return {value, onChange}
+}
+
 const App = () => {
-  const [item, setItem] = useState(1)
-  const incrementItem = () => setItem(item + 1)
-  const decrementItem = () => setItem(item - 1)
+  const name = useInput("Mr.")
   return (
     <div className="App">
-      <h1>{item}</h1>
-      <button onClick={incrementItem}>Increment</button>
-      <button onClick={decrementItem}>Decrement</button>
+      <h1>Hello</h1>
+      <input placeholder='Name' {...name} onChange={name.onChange}/>
     </div>
   );
 }
